@@ -1,18 +1,3 @@
-/*
-    the player is asked to choose an item, the input
-    will be stored in a variable. if the player does not choose
-    a valid item, the game will ask again the player to choose until
-    he will choose a valid item;
-    create a function than return a random item
-    the value returned will be stored in another variable;
-    the 2 values will be compared and it will show a message
-    to the player, "You won" or "You lost" and the reason why;
-    the game will be played best of 5;
-    if, after the 5 rounds it's a draw between the player and
-    the computer, the game will be played until one of them
-    will win. 
-*/
-
 let playerScore = 0;
 let computerScore = 0;
 
