@@ -68,7 +68,7 @@ for(i = 0; (i < 5 && playerScore < 3 && computerScore < 3) || playerScore === co
     let computerChoice = getComputerChoice();
     let result = playRound(playerChoice, computerChoice);
     switch(result) {
-        case 1: 
+        case 1:
             playerScore++;
             break;
         case 2: 
