@@ -1,80 +1,97 @@
-let playerScore = 0;
-let computerScore = 0;
-
-function validItem(playerChoice) {
-    if(playerChoice === "rock" || playerChoice === "paper" || playerChoice === "scissors") {
-        return 1;
-    }
-    else return 0;
-}
+let playerScore = document.querySelector(".player-computer #player-score");
+let computerScore = document.querySelector(".player-computer #computer-score");
 
 function getPlayerChoice() {
-    let playerChoice = prompt("Choose Rock, Paper or Scissors").toLowerCase().trim();
-    if(validItem(playerChoice)) {
-        return playerChoice;
-    }
-    else {
-        return getPlayerChoice();
-    }
+    let playerChoice = document.querySelector("#selection");
+    return playerChoice.addEventListener("click", (e) => e.target.id);
 }
 
 function getComputerChoice() {
-    switch(Math.floor(Math.random() * 3) + 1) {
-        case 1: return "rock";
-        case 2: return "paper";
-        case 3: return "scissors";
+    switch (Math.floor(Math.random() * 3) + 1) {
+        case 1:
+            return "rock";
+        case 2:
+            return "paper";
+        case 3:
+            return "scissors";
     }
 }
 
 function playRound(playerChoice, computerChoice) {
-    if(playerChoice === computerChoice) {
-        alert("It's a tie!");
+    if (playerChoice === computerChoice) {
+        chooseOptionsText.textContent = "It's a tie!";
         return 0;
-    }
-    else if(playerChoice === "rock") {
-        if(computerChoice === "scissors") {
-            alert("You won! Rock beats Scissors.");
+    } else if (playerChoice === "rock") {
+        if (computerChoice === "scissors") {
+            chooseOptionsText.textContent = "You won! Rock beats Scissors.";
             return 1;
-        }
-        else {
-            alert("You lose! Paper beats Rock.");
+        } else {
+            chooseOptionsText.textContent = "You lose! Paper beats Rock.";
             return 2;
         }
-    }
-    else if(playerChoice === "paper") {
-        if(computerChoice === "rock") {
-            alert("You won! Paper beats Rock.");
+    } else if (playerChoice === "paper") {
+        if (computerChoice === "rock") {
+            chooseOptionsText.textContent = "You won! Paper beats Rock.";
             return 1;
-        }
-        else {
-            alert("You lose! Scissors beats Paper.");
+        } else {
+            chooseOptionsText.textContent = "You lose! Scissors beats Paper.";
             return 2;
         }
-    }
-    else if(playerChoice === "scissors") {
-        if(computerChoice === "paper") {
-            alert("You won! Scissors beats Paper.");
+    } else if (playerChoice === "scissors") {
+        if (computerChoice === "paper") {
+            chooseOptionsText.textContent = "You won! Scissors beats Paper.";
             return 1;
-        }
-        else {
-            alert("You lose! Rock beats Scissors!");
+        } else {
+            chooseOptionsText.textContent = "You lose! Rock beats Scissors!";
             return 2;
         }
     }
 }
 
-for(i = 0; (i < 5 && playerScore < 3 && computerScore < 3) || playerScore === computerScore; i++) {
-    let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
-    let result = playRound(playerChoice, computerChoice);
-    switch(result) {
-        case 1:
-            playerScore++;
-            break;
-        case 2: 
-            computerScore++;
-            break;
-    }
+let btn = document.querySelector("button");
+const selection = document.getElementById("selection");
+const chooseOptionsText = document.getElementById("choose-options-text");
+let winner = document.getElementById("game-result")
+
+function showWinner() {
+    winner.textContent = Number(playerScore.textContent) === 5 ? "You won the game!" : "You lost the game!"
 }
 
-alert(`Player score: ${playerScore} \nComputer Score: ${computerScore}`);
+selection.addEventListener("click", (e) => {
+    if (
+        Number(playerScore.textContent) >= 5 ||
+        Number(computerScore.textContent) >= 5
+    ) {
+        return;
+    } else {
+        let playerChoice = e.target.id;
+        let computerChoice = getComputerChoice();
+        let result = playRound(playerChoice, computerChoice);
+        chooseOptionsText.textContent += " Choose again!";
+        switch (result) {
+            case 1:
+                playerScore.textContent = Number(playerScore.textContent) + 1;
+                break;
+            case 2:
+                computerScore.textContent = Number(computerScore.textContent) + 1;
+                break;
+        }
+        if (
+            Number(playerScore.textContent) === 5 ||
+            Number(computerScore.textContent) === 5
+        ) {
+            btn.removeAttribute("disabled");
+            btn.classList.add("active");
+            showWinner();
+        }
+    }
+});
+
+btn.addEventListener("click", () => {
+    chooseOptionsText.textContent = "Choose a weapon to begin the game!!!";
+    winner.textContent = "";
+    playerScore.textContent = 0;
+    computerScore.textContent = 0;
+    btn.setAttribute("disabled", "true");
+    btn.classList.remove("active");
+});

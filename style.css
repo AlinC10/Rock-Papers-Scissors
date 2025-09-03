@@ -11,19 +11,22 @@
 body {
     background-color: #0D0D0D;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 75%;
     margin: 0 auto;
-    gap: 1rem;
+}
+
+h1 {
+    padding-top: 10%;
 }
 
 img {
     width: 150px;
-    height: 150px;
+    height: auto;
     object-fit: fill;
     border: 3px solid white;
+    flex-shrink: 1;
+    min-width: 30px;
+    transition: 1s;
 }
 
 #selection {
@@ -39,18 +42,16 @@ ul {
     align-items: center;
 }
 
-#rules {
-    /*margin: 3% 0;*/
+#rules,
+#introduction,
+#choose-options {
+    margin: 15px 0;
 }
 
 #rules > p,
 #choose-options > p
 {
     font-weight: 600;
-}
-
-#introduction {
-    /*margin-top: 2%;*/
 }
 
 #score-section > div {
@@ -60,10 +61,26 @@ ul {
     gap: 0.5rem;
 }
 
-#choose-options {
-    /*margin: 3% 0;*/
+#selection {
+    margin-top: 8px;
 }
 
-#selection {
-    margin-top: 2%;
+button {
+    margin-top: 8px;
+    height: 30px;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #1E90FF;
+    opacity: 30%;
+}
+
+.active {
+    opacity: 100%;
+}
+
+img:hover {
+    background-color: #1E90FF;
+    border-color: #1E90FF;
+    transform: scale(1.1);
 }
