@@ -51,10 +51,13 @@ function playRound(playerChoice, computerChoice) {
 let btn = document.querySelector("button");
 const selection = document.getElementById("selection");
 const chooseOptionsText = document.getElementById("choose-options-text");
-let winner = document.getElementById("game-result")
+let winner = document.getElementById("game-result");
 
 function showWinner() {
-    winner.textContent = Number(playerScore.textContent) === 5 ? "You won the game!" : "You lost the game!"
+    winner.textContent =
+        Number(playerScore.textContent) === 5
+            ? "You won the game!"
+            : "You lost the game!";
 }
 
 selection.addEventListener("click", (e) => {
@@ -73,7 +76,8 @@ selection.addEventListener("click", (e) => {
                 playerScore.textContent = Number(playerScore.textContent) + 1;
                 break;
             case 2:
-                computerScore.textContent = Number(computerScore.textContent) + 1;
+                computerScore.textContent =
+                    Number(computerScore.textContent) + 1;
                 break;
         }
         if (
